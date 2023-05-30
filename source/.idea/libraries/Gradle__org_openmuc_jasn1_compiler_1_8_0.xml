@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: org.openmuc:jasn1-compiler:1.8.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.openmuc/jasn1-compiler/1.8.0/717240c8c726c7a5103783e5ff46b72e7ad3a806/jasn1-compiler-1.8.0.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.openmuc/jasn1-compiler/1.8.0/b95ea79d0569ed64ce092622c5415589c6023770/jasn1-compiler-1.8.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.openmuc/jasn1-compiler/1.8.0/8c409cde6a35444ac25691fdb3a8915ea0f1939/jasn1-compiler-1.8.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

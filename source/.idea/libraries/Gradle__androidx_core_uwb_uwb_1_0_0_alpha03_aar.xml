@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: androidx.core.uwb:uwb:1.0.0-alpha03@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/2bd1f0e946133f62c385e5b098532a40/transformed/uwb-1.0.0-alpha03/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/2bd1f0e946133f62c385e5b098532a40/transformed/uwb-1.0.0-alpha03/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/2bd1f0e946133f62c385e5b098532a40/transformed/uwb-1.0.0-alpha03/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.core.uwb/uwb/1.0.0-alpha03/8fd4e083b724fc195249d84f6e67774d5e980d8b/uwb-1.0.0-alpha03-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

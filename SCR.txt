@@ -1,0 +1,8 @@
+-----------------------------------------------------------
+Release Name: UWBMobileKit
+Release Version: 1.0
+Outgoing License: Apache-2.0
+Description: Android UWB Demo Application
+Location: https://github.com/NXP-UWB/UWBMobileKit
+Origin: NXP (Apache-2.0)
+-----------------------------------------------------------

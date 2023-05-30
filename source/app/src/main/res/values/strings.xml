@@ -1,0 +1,55 @@
+<!--
+  ~ Copyright 2022 NXP
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+    <string name="app_name">UWB Mobile Kit</string>
+
+    <string name="missing_techs">This demo cannot be executed on this phone because required technologies are missing</string>
+    <string name="request_enable_uwb">UWB is not enabled. Please enable UWB in settings</string>
+    <string name="request_enable_location">Location is not enabled. Please enable location in settings</string>
+    <string name="request_enable_bluetooth">"Bluetooth is not enabled. Please enable bluetooth in settings",</string>
+
+    <string name="denied_with_never_ask_again">Permission has been denied by flagging NEVER ASK AGAIN. Please enable the permission from Settings</string>
+    <string name="permission_alert">You need grant required permissions for the application to work as expected</string>
+
+    <string name="uwb_ranging_device_value">UWB ranging device: %1$s</string>
+    <string name="uwb_ranging_device_not_started">UWB ranging not started</string>
+    <string name="uwb_distance_value">Distance: %1$.2f (m)</string>
+    <string name="uwb_distance_value_cm">Distance: %1$.0f (cm)</string>
+    <string name="uwb_distance_not_started">Distance: - (m)</string>
+    <string name="uwb_aoa_value">AoA Azimuth: %1$.0f (°)</string>
+    <string name="uwb_aoa_not_started">AoA Azimuth: - (°)</string>
+
+    <!-- BLE States -->
+    <string name="ble_state">BLE State</string>
+    <string name="ble_unknown">Unknown</string>
+    <string name="ble_not_started">Not started</string>
+    <string name="ble_scanning">Scanning</string>
+    <string name="ble_connected">Connected</string>
+
+    <!-- UWB States -->
+    <string name="uwb_state">UWB State</string>
+    <string name="uwb_unknown">Unknown</string>
+    <string name="uwb_not_started">Not started</string>
+    <string name="uwb_configuring">Configuring</string>
+    <string name="uwb_ranging">Ranging</string>
+    <string name="uwb_stopped">Stopped</string>
+
+    <!-- Helpers for dialogs -->
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_accept">Accept</string>
+    <string name="dialog_cancel">Cancel</string>
+</resources>
