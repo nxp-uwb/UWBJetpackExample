@@ -54,6 +54,8 @@ public class UwbManagerImpl {
     public static final int UWB_PREAMBLE_INDEX = 10;
 
     private UwbManager uwbManager = null;
+
+
     private Single<UwbControllerSessionScope> controllerSessionScopeSingle = null;
     private UwbControllerSessionScope controllerSessionScope = null;
     private Single<UwbControleeSessionScope> controleeSessionScopeSingle = null;
@@ -126,24 +128,29 @@ public class UwbManagerImpl {
             Log.d(TAG, "UWB Channel params, Channel: " + UWB_CHANNEL + " preambleIndex: " + UWB_PREAMBLE_INDEX);
 
             // Need to pass the local address to the other peer
-            Log.d(TAG, "UWB Local Adress: " + localAddress);
+            Log.d(TAG, "UWB Local Address: " + localAddress);
 
             // UWB Shield device
-            UwbAddress shieldUwbAddress = new UwbAddress(Utils.revert(uwbDeviceConfigData.getDeviceMacAddress()));
+            UwbAddress shieldUwbAddress = new UwbAddress(uwbDeviceConfigData.getDeviceMacAddress());
             UwbDevice shieldUwbDevice = new UwbDevice(shieldUwbAddress);
-            Log.d(TAG, "UWB Destination Adress: " + shieldUwbAddress);
+            Log.d(TAG, "UWB Destination Address: " + shieldUwbAddress);
 
             List<UwbDevice> listUwbDevices = new ArrayList<>();
             listUwbDevices.add(shieldUwbDevice);
+
+            // https://developer.android.com/guide/topics/connectivity/uwb#known_issue_byte_order_reversed_for_mac_address_and_static_sts_vendor_id_fields
+            // GMS Core update is doing byte reverse as per UCI spec
+            // SessionKey is used to match Vendor ID in UWB Device firmware
+            byte[] sessionKey = Utils.hexStringToByteArray("0807010203040506");
 
             Log.d(TAG, "Configure ranging parameters for Profile ID: " + uwbProfileId);
             RangingParameters rangingParameters = new RangingParameters(
                     uwbProfileId,
                     sessionId,
-                    null,
+                    sessionKey,
                     uwbComplexChannel,
                     listUwbDevices,
-                    RangingParameters.RANGING_UPDATE_RATE_AUTOMATIC
+                    RangingParameters.RANGING_UPDATE_RATE_FREQUENT
             );
 
             Flowable<RangingResult> rangingResultFlowable;
@@ -198,7 +205,7 @@ public class UwbManagerImpl {
             uwbPhoneConfigData.setChannel((byte) UWB_CHANNEL);
             uwbPhoneConfigData.setProfileId(uwbProfileId);
             uwbPhoneConfigData.setDeviceRangingRole(uwbDeviceRangingRole);
-            uwbPhoneConfigData.setPhoneMacAddress(Utils.revert(localAddress.getAddress()));
+            uwbPhoneConfigData.setPhoneMacAddress(localAddress.getAddress());
 
             // Send the UWB ranging session configuration data back to the listener
             uwbRangingListener.onRangingStarted(uwbPhoneConfigData);
@@ -220,12 +227,8 @@ public class UwbManagerImpl {
     }
 
     private byte selectUwbProfileId(int supportedUwbProfileIds) {
-        if (BigInteger.valueOf(supportedUwbProfileIds).testBit(RangingParameters.UWB_CONFIG_ID_1)) {
-            return (byte) RangingParameters.UWB_CONFIG_ID_1;
-        } else if (BigInteger.valueOf(supportedUwbProfileIds).testBit(RangingParameters.UWB_CONFIG_ID_2)) {
-            return (byte) RangingParameters.UWB_CONFIG_ID_2;
-        } else if (BigInteger.valueOf(supportedUwbProfileIds).testBit(RangingParameters.UWB_CONFIG_ID_3)) {
-            return (byte) RangingParameters.UWB_CONFIG_ID_3;
+        if (BigInteger.valueOf(supportedUwbProfileIds).testBit(RangingParameters.CONFIG_UNICAST_DS_TWR)) {
+            return (byte) RangingParameters.CONFIG_UNICAST_DS_TWR;
         }
 
         return 0;

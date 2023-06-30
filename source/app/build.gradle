@@ -26,7 +26,7 @@ android {
         minSdk 31
         targetSdk 33
         versionCode 1
-        versionName "1.0"
+        versionName "1.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -51,8 +51,12 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
     // Use to implement UWB (ultra-wideband) on supported devices
-    implementation "androidx.core.uwb:uwb-rxjava3:1.0.0-alpha03"
-    implementation "androidx.core.uwb:uwb:1.0.0-alpha03"
+    implementation "androidx.core.uwb:uwb-rxjava3:1.0.0-alpha05"
+    implementation "androidx.core.uwb:uwb:1.0.0-alpha05"
+
+    // Align versions of all Kotlin components to avoid compilation issues with alpha05
+    implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.8.0"
 
     // Used to serialize objects
     implementation group: 'org.openmuc', name: 'jasn1-compiler', version:'1.8.0'

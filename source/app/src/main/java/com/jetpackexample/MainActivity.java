@@ -21,7 +21,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.provider.Settings;
 import android.util.Log;
 import android.widget.ImageView;
@@ -58,8 +57,6 @@ public class MainActivity extends AppCompatActivity
     private TextView uwbAoaInfo;
     private ImageView uwbAoaArrow;
     private TextView uwbRangingDevice;
-
-    private Handler mHandler;
 
     // App states
     public enum AppState {
@@ -114,7 +111,6 @@ public class MainActivity extends AppCompatActivity
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mHandler = new Handler();
 
         uwbManagerImpl = UwbManagerImpl.getInstance(MainActivity.this);
         locationManagerImpl = LocationManagerImpl.getInstance(MainActivity.this);
