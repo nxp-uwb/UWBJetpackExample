@@ -15,7 +15,7 @@
   -->
 
 <resources>
-    <string name="app_name">UWB Mobile Kit</string>
+    <string name="app_name">UWB Jetpack example</string>
 
     <string name="missing_techs">This demo cannot be executed on this phone because required technologies are missing</string>
     <string name="request_enable_uwb">UWB is not enabled. Please enable UWB in settings</string>

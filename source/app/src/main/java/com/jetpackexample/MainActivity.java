@@ -303,8 +303,15 @@ public class MainActivity extends AppCompatActivity
             float aoaAzimuth = rangingResultPosition.getPosition().getAzimuth().getValue();
             Log.d(TAG, "Position AoA Azimuth: " + aoaAzimuth);
             updateRangingAoaInfo(aoaAzimuth);
+        } else {
+            Log.e(TAG, "Unexpected rangingResult value, Azimuth is null!");
         }
-    }
+        if (rangingResultPosition.getPosition().getElevation() != null) {
+            float aoaElevation = rangingResultPosition.getPosition().getElevation().getValue();
+            Log.d(TAG, "Position AoA Elevation: " + aoaElevation);
+        } else {
+            Log.e(TAG, "Unexpected rangingResult value, no Elevation value reported!");
+        }    }
 
     private void displayRangingError(Throwable error) {
         Log.e(TAG, "Ranging error: " + error.getMessage());

@@ -28,5 +28,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "UWB Mobile Kit"
+rootProject.name = "UWB Jetpack example"
 include ':app'
