@@ -55,12 +55,12 @@ public class UwbManagerImpl {
 
     private UwbManager uwbManager = null;
 
-
     private Single<UwbControllerSessionScope> controllerSessionScopeSingle = null;
     private UwbControllerSessionScope controllerSessionScope = null;
     private Single<UwbControleeSessionScope> controleeSessionScopeSingle = null;
     private UwbControleeSessionScope controleeSessionScope = null;
     private Disposable disposable = null;
+
 
     private static UwbManagerImpl mInstance = null;
 
@@ -104,7 +104,7 @@ public class UwbManagerImpl {
             byte uwbDeviceRangingRole = selectUwbDeviceRangingRole(uwbDeviceConfigData.getSupportedDeviceRangingRoles());
             Log.d(TAG, "Uwb device supported ranging roles: " + uwbDeviceConfigData.getSupportedDeviceRangingRoles() + ", selected role for UWB device: " + uwbDeviceRangingRole);
 
-            byte uwbProfileId = selectUwbProfileId(uwbDeviceConfigData.getSupportedUwbProfileIds());
+            int uwbProfileId = selectUwbProfileId(uwbDeviceConfigData.getSupportedUwbProfileIds());
             Log.d(TAG, "Uwb device supported UWB profile IDs: " + uwbDeviceConfigData.getSupportedUwbProfileIds() + ", selected UWB profile ID: " + uwbProfileId);
 
             UwbAddress localAddress;
@@ -122,6 +122,7 @@ public class UwbManagerImpl {
 
             // Assign a random Session ID
             int sessionId = new Random().nextInt();
+            int subSessionId = new Random().nextInt();
             Log.d(TAG, "UWB sessionId: " + sessionId);
 
             UwbComplexChannel uwbComplexChannel = new UwbComplexChannel(UWB_CHANNEL, UWB_PREAMBLE_INDEX);
@@ -142,15 +143,19 @@ public class UwbManagerImpl {
             // GMS Core update is doing byte reverse as per UCI spec
             // SessionKey is used to match Vendor ID in UWB Device firmware
             byte[] sessionKey = Utils.hexStringToByteArray("0807010203040506");
+            int subSessionId = sessionId;
+            byte[] subSessionKeyInfo = Utils.hexStringToByteArray("0807010203040506");
 
             Log.d(TAG, "Configure ranging parameters for Profile ID: " + uwbProfileId);
             RangingParameters rangingParameters = new RangingParameters(
                     uwbProfileId,
                     sessionId,
+                    subSessionId,
                     sessionKey,
+                    subSessionKeyInfo,
                     uwbComplexChannel,
                     listUwbDevices,
-                    RangingParameters.RANGING_UPDATE_RATE_FREQUENT
+                    RangingParameters.RANGING_UPDATE_RATE_AUTOMATIC
             );
 
             Flowable<RangingResult> rangingResultFlowable;
@@ -203,7 +208,7 @@ public class UwbManagerImpl {
             uwbPhoneConfigData.setSessionId(sessionId);
             uwbPhoneConfigData.setPreambleId((byte) UWB_PREAMBLE_INDEX);
             uwbPhoneConfigData.setChannel((byte) UWB_CHANNEL);
-            uwbPhoneConfigData.setProfileId(uwbProfileId);
+            uwbPhoneConfigData.setProfileId((byte)uwbProfileId);
             uwbPhoneConfigData.setDeviceRangingRole(uwbDeviceRangingRole);
             uwbPhoneConfigData.setPhoneMacAddress(localAddress.getAddress());
 

@@ -291,27 +291,35 @@ public class MainActivity extends AppCompatActivity
 
     private void displayRangingResult(RangingResult rangingResult) {
         // Update UI
-        RangingResult.RangingResultPosition rangingResultPosition = (RangingResult.RangingResultPosition) rangingResult;
-        if (rangingResultPosition.getPosition().getDistance() != null) {
-            float distance = rangingResultPosition.getPosition().getDistance().getValue();
-            Log.d(TAG, "Position distance: " + distance);
-            updateRangingDistanceInfo(distance);
+        if (rangingResult instanceof RangingResult.RangingResultPosition) {
+
+            RangingResult.RangingResultPosition rangingResultPosition = (RangingResult.RangingResultPosition) rangingResult;
+            if (rangingResultPosition.getPosition().getDistance() != null) {
+                float distance = rangingResultPosition.getPosition().getDistance().getValue();
+                Log.d(TAG, "Position distance: " + distance);
+                updateRangingDistanceInfo(distance);
+            } else {
+                Log.e(TAG, "Unexpected rangingResult value, distance is null!");
+            }
+            if (rangingResultPosition.getPosition().getAzimuth() != null) {
+                float aoaAzimuth = rangingResultPosition.getPosition().getAzimuth().getValue();
+                Log.d(TAG, "Position AoA Azimuth: " + aoaAzimuth);
+                updateRangingAoaInfo(aoaAzimuth);
+            } else {
+                Log.e(TAG, "Unexpected rangingResult value, Azimuth is null!");
+            }
+            if (rangingResultPosition.getPosition().getElevation() != null) {
+                float aoaElevation = rangingResultPosition.getPosition().getElevation().getValue();
+                Log.d(TAG, "Position AoA Elevation: " + aoaElevation);
+            } else {
+                Log.e(TAG, "Unexpected rangingResult value, no Elevation value reported!");
+            }
+        } else if (rangingResult instanceof RangingResult.RangingResultPeerDisconnected) {
+            Log.d(TAG, "Peer disconnected: address = " + rangingResult.getDevice().getAddress());
         } else {
-            Log.e(TAG, "Unexpected rangingResult value, distance is null!");
+            Log.d(TAG, "Received unknown rangingResult instance");
         }
-        if (rangingResultPosition.getPosition().getAzimuth() != null) {
-            float aoaAzimuth = rangingResultPosition.getPosition().getAzimuth().getValue();
-            Log.d(TAG, "Position AoA Azimuth: " + aoaAzimuth);
-            updateRangingAoaInfo(aoaAzimuth);
-        } else {
-            Log.e(TAG, "Unexpected rangingResult value, Azimuth is null!");
-        }
-        if (rangingResultPosition.getPosition().getElevation() != null) {
-            float aoaElevation = rangingResultPosition.getPosition().getElevation().getValue();
-            Log.d(TAG, "Position AoA Elevation: " + aoaElevation);
-        } else {
-            Log.e(TAG, "Unexpected rangingResult value, no Elevation value reported!");
-        }    }
+    }
 
     private void displayRangingError(Throwable error) {
         Log.e(TAG, "Ranging error: " + error.getMessage());
