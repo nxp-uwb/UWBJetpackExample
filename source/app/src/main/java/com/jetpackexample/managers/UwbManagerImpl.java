@@ -143,7 +143,6 @@ public class UwbManagerImpl {
             // GMS Core update is doing byte reverse as per UCI spec
             // SessionKey is used to match Vendor ID in UWB Device firmware
             byte[] sessionKey = Utils.hexStringToByteArray("0807010203040506");
-            int subSessionId = sessionId;
             byte[] subSessionKeyInfo = Utils.hexStringToByteArray("0807010203040506");
 
             Log.d(TAG, "Configure ranging parameters for Profile ID: " + uwbProfileId);
